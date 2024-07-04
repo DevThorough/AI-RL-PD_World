@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>PD World</title>
     <style>
       canvas {
-          padding: 0;
-          margin-bottom: 0;
-          margin-top: 0;
-          margin-left: auto;
-          margin-right: auto;
-          display: block;
-          /*width: 800px;*/
-          border: 1px solid black;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        /*width: 800px;*/
+        border: 1px solid black;
       }
       h1 {
         text-align: center;
@@ -19,61 +19,101 @@
         margin: 0;
       }
     </style>
-</head>
-<body>
-    <h1>Team Sagittarius' PD World Experiment</h1>
+  </head>
+  <body>
+    <h1>Path Discovery 5x5 World Experiment</h1>
     <canvas id="PDWorldCanvas" width="600" height="632"></canvas>
-      
+
     <script src="main.js"></script>
-  <hr>
-  <button onclick='moveButton()'>Move</button>
-  <select name="policy" id="selectPolicy">
-    <option value="prandom">PRANDOM</option>
-    <option value="pexploit">PEXPLOIT</option>
-    <option value="pgreedy">PGREEDY</option>
-  </select>
+    <hr />
+    <button onclick="moveButton()">Move</button>
+    <select name="policy" id="selectPolicy">
+      <option value="prandom">PRANDOM</option>
+      <option value="pexploit">PEXPLOIT</option>
+      <option value="pgreedy">PGREEDY</option>
+    </select>
 
-  <br>
-  <div>Click on any of the experiment buttons to get started! Also be sure to press F12 to see extra details for each game.</div>
-  
-  <button onclick='exp1a()'>Experiment 1a</button>
-  <button onclick='exp1b()'>Experiment 1b</button>
-  <button onclick='exp1c()'>Experiment 1c</button>
-  <br>
-  <button onclick='exp2()'>Experiment 2</button>
-  <br>
-  <button onclick='exp3a()'>Experiment 3a</button>
-  <button onclick='exp3b()'>Experiment 3b</button>
-  <br>
-  <button onclick='exp4a()'>Experiment 4a</button>
-  <button onclick='exp4b()'>Experiment 4b</button>
-  <br>
-  <button onclick='stopexp()'>Stop</button>
-  <br>
+    <br />
+    <div>
+      Click on any of the experiment buttons to get started! Also be sure to
+      press F12 to see extra details for each game.
+    </div>
 
-  <input type="range" id="inputDelay" name="delay" min="1" max="1000" step='1' value='1'/>
-  <label for="delay" id='labelDelay'>Delay per step: <output id="valueDelay"></output> ms (higher is slower) *Note that the delay CANNOT be changed midway through an experiment.</label>
-  <script>
-  const value = document.querySelector("#valueDelay");
-  const input = document.querySelector("#inputDelay");
-  value.textContent = input.value;
-  input.addEventListener("input", (event) => {
-    value.textContent = event.target.value;
-  });
-  </script>
-  <br>
-  <input type="checkbox" id="showQvalues" name="showQvalues" checked>
-  <label for="showQvalues">Enable Q Visualization</label><br>
+    <button onclick="exp1a()">Experiment 1a</button>
+    <button onclick="exp1b()">Experiment 1b</button>
+    <button onclick="exp1c()">Experiment 1c</button>
+    <br />
+    <button onclick="exp2()">Experiment 2</button>
+    <br />
+    <button onclick="exp3a()">Experiment 3a</button>
+    <button onclick="exp3b()">Experiment 3b</button>
+    <br />
+    <button onclick="exp4a()">Experiment 4a</button>
+    <button onclick="exp4b()">Experiment 4b</button>
+    <br />
+    <button onclick="stopexp()">Stop</button>
+    <br />
 
-  <ul>
-    <li>1a: Q-Learning; 500 steps of PRANDOM, 8500 steps of PRANDOM (&alpha; = 0.3, &gamma; = 0.5)</li>
-    <li>1b: Q-Learning; 500 steps of PRANDOM, 8500 steps of PGREEDY (&alpha; = 0.3, &gamma; = 0.5)</li>
-    <li>1c: Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; = 0.3, &gamma; = 0.5)</li>
-    <li>2: SARSA; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; = 0.3, &gamma; = 0.5)</li>
-    <li>3a: SARSA or Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; = 0.15, &gamma; = 0.5)</li>
-    <li>3b: SARSA or Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; = 0.45, &gamma; = 0.5)</li>
-    <li>4a: SARSA or Q-Learning; 500 steps of PRANDOM, after which PEXPLOIT, terminate after 6 games (&alpha; = 0.3, &gamma; = 0.5)</li>
-    <li>4b: SARSA or Q-Learning; 500 steps of PRANDOM, after which PEXPLOIT, and after the first 3 games, change the location of the pickups, then run for 3 more games (&alpha; = 0.3, &gamma; = 0.5)</li>
-  </ul>
-</body>
+    <input
+      type="range"
+      id="inputDelay"
+      name="delay"
+      min="1"
+      max="1000"
+      step="1"
+      value="1"
+    />
+    <label for="delay" id="labelDelay"
+      >Delay per step: <output id="valueDelay"></output> ms (higher is slower)
+      *Note that the delay CANNOT be changed midway through an
+      experiment.</label
+    >
+    <script>
+      const value = document.querySelector("#valueDelay");
+      const input = document.querySelector("#inputDelay");
+      value.textContent = input.value;
+      input.addEventListener("input", (event) => {
+        value.textContent = event.target.value;
+      });
+    </script>
+    <br />
+    <input type="checkbox" id="showQvalues" name="showQvalues" checked />
+    <label for="showQvalues">Enable Q Visualization</label><br />
+
+    <ul>
+      <li>
+        1a: Q-Learning; 500 steps of PRANDOM, 8500 steps of PRANDOM (&alpha; =
+        0.3, &gamma; = 0.5)
+      </li>
+      <li>
+        1b: Q-Learning; 500 steps of PRANDOM, 8500 steps of PGREEDY (&alpha; =
+        0.3, &gamma; = 0.5)
+      </li>
+      <li>
+        1c: Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; =
+        0.3, &gamma; = 0.5)
+      </li>
+      <li>
+        2: SARSA; 500 steps of PRANDOM, 8500 steps of PEXPLOIT (&alpha; = 0.3,
+        &gamma; = 0.5)
+      </li>
+      <li>
+        3a: SARSA or Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT
+        (&alpha; = 0.15, &gamma; = 0.5)
+      </li>
+      <li>
+        3b: SARSA or Q-Learning; 500 steps of PRANDOM, 8500 steps of PEXPLOIT
+        (&alpha; = 0.45, &gamma; = 0.5)
+      </li>
+      <li>
+        4a: SARSA or Q-Learning; 500 steps of PRANDOM, after which PEXPLOIT,
+        terminate after 6 games (&alpha; = 0.3, &gamma; = 0.5)
+      </li>
+      <li>
+        4b: SARSA or Q-Learning; 500 steps of PRANDOM, after which PEXPLOIT, and
+        after the first 3 games, change the location of the pickups, then run
+        for 3 more games (&alpha; = 0.3, &gamma; = 0.5)
+      </li>
+    </ul>
+  </body>
 </html>
